@@ -7,7 +7,7 @@ let userAgent,
 export const setCurrentAgent = UA => {
   userAgent = UA
   agentId = makeId(userAgent)
-  updateIdentifications('currentAgent', agentId)
+  updateIdentifications('currUA', agentId)
 }
 
 const makeId = ua => {
