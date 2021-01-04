@@ -1,0 +1,21 @@
+{
+  "name": "@revgaming/identifications",
+  "version": "1.0.1",
+  "author": "estagent <estagent@gmail.com>",
+  "description": "agent and user tracker module for @revgaming/global",
+  "keywords": [
+    "javascript",
+    "revgaming",
+    "global",
+    "device",
+    "userAgent"
+  ],
+  "homepage": "https://github.com/estagent/identifications",
+  "main": "src/index.js",
+  "dependencies": {
+    "@revgaming/helpers": "^1.0.8",
+    "@revgaming/session": "^1.0.3",
+    "crypto-js": "^4.0.0",
+    "uuid": "^8.3.2"
+  }
+}
