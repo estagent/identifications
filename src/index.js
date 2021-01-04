@@ -22,6 +22,7 @@ export const bootIdentifications = (opts = {}) => {
         IncrementAgentSessionsOnCreated()
     }
     if (opts.hasOwnProperty('users')) {
+        setCurrentUserOnMounted()
         setCurrentUserOnAuthenticated()
         IncrementUserHitsOnMounted()
         IncrementUserLoginsOnAuthenticated()

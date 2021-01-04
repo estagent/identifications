@@ -16,7 +16,15 @@ export const IncrementAgentHitsOnInitialized = () =>
 export const setCurrentUserOnAuthenticated = () =>
     window.addEventListener(Events.UserAuthenticated, event => {
         const user = getEventDetail(event, 'user')
-        if (user) setCurrentUser(user.uuid ?? user.id)
+        if (!user) throw `user not found on ${event.type}`
+        setCurrentUser(user.uuid ?? user.id)
+    })
+
+export const setCurrentUserOnMounted = () =>
+    window.addEventListener(Events.UserMounted, event => {
+        const user = getEventDetail(event, 'user')
+        if (!user) throw `user not found on ${event.type}`
+        setCurrentUser(user.uuid ?? user.id)
     })
 
 export const setCurrentAgentOnInitialized = () =>
