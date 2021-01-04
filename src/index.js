@@ -11,7 +11,7 @@ import {
 import {getUsers} from "./users";
 import {getAgents} from "./agents";
 
-export const bootTracker = (opts = {}) => {
+export const bootIdentifications = (opts = {}) => {
 
     if (opts.key)
         setStorageKeyName(opts.key)
@@ -25,6 +25,10 @@ export const bootTracker = (opts = {}) => {
         setCurrentUserOnAuthenticated()
         IncrementUserHitsOnMounted()
         IncrementUserLoginsOnAuthenticated()
+    }
+    return {
+        getIdentifier: getIdentifier,
+        getIdentifications: getIdentifications,
     }
 }
 
