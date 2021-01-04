@@ -27,7 +27,7 @@ export const IncrementUserLoginsOnAuthenticated = () =>
         incrementUserCounter('logins'),
     )
 
-export const IncrementUserHitOnMounted = () =>
+export const IncrementUserHitsOnMounted = () =>
     window.addEventListener(Events.UserMounted, () =>
         incrementUserCounter('hits'),
     )

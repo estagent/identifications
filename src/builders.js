@@ -52,7 +52,7 @@ export const updateHeadersWithIdentifications = (headers, opts) => {
     if (typeof headers !== 'object')
         throw "headers is not object"
 
-    let identificationHeaders;
+    let identificationHeaders = {}
 
     if (!opts)
         identificationHeaders = makeIdentificationHeaders()
@@ -66,8 +66,8 @@ export const updateHeadersWithIdentifications = (headers, opts) => {
 
         const bOpts = [];
 
-        if (opts.hasOwnProperty('identifier')){
-            if (opts.identifier !== false){
+        if (opts.hasOwnProperty('identifier')) {
+            if (opts.identifier !== false) {
                 if (typeof opts.identifier === 'string')
                     bOpts.push({[opts.identifier]: 'identifier'})
                 else

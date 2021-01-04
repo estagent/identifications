@@ -1,6 +1,6 @@
 {
   "name": "@revgaming/identifications",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "estagent <estagent@gmail.com>",
   "description": "user and userAgent identification trackers module for @revgaming/global",
   "keywords": [
@@ -20,7 +20,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@revgaming/helpers": "^1.0.8",
-    "@revgaming/session": "^1.0.3",
+    "@revgaming/session": "^1.0.4",
     "crypto-js": "^4.0.0",
     "uuid": "^8.3.2"
   }

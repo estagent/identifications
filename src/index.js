@@ -4,7 +4,7 @@ import {
     IncrementAgentSessionsOnCreated,
     IncrementAgentHitsOnInitialized,
     IncrementUserLoginsOnAuthenticated,
-    IncrementUserHitOnMounted,
+    IncrementUserHitsOnMounted,
     setCurrentUserOnAuthenticated,
     setCurrentAgentOnInitialized,
 } from './listeners'
@@ -23,7 +23,7 @@ export const bootTracker = (opts = {}) => {
     }
     if (opts.hasOwnProperty('users')) {
         setCurrentUserOnAuthenticated()
-        IncrementUserHitOnMounted()
+        IncrementUserHitsOnMounted()
         IncrementUserLoginsOnAuthenticated()
     }
 }
