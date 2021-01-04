@@ -2,13 +2,19 @@
   "name": "@revgaming/identifications",
   "version": "1.0.1",
   "author": "estagent <estagent@gmail.com>",
-  "description": "agent and user tracker module for @revgaming/global",
+  "description": "user and userAgent identification trackers module for @revgaming/global",
   "keywords": [
     "javascript",
     "revgaming",
     "global",
-    "device",
-    "userAgent"
+    "user",
+    "tracker",
+    "mitigation",
+    "session",
+    "ddos",
+    "userAgent",
+    "laravel",
+    "vue"
   ],
   "homepage": "https://github.com/estagent/identifications",
   "main": "src/index.js",
