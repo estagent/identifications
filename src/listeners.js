@@ -1,7 +1,17 @@
 import {Events} from '@revgaming/session'
-import {getEventDetail} from '@revgaming/helpers'
 import {incrementUserCounter, setCurrentUser} from './users'
 import {incrementAgentCounter, setCurrentAgent} from './agents'
+
+const getEventUser = (event) => {
+    if (!event.detail)
+        if (!user) throw `detail not found in ${event.type}`
+    const user = event.detail.user;
+    if (!user) throw `user not found on ${event.type}`
+    if (!(user instanceof Object))
+        throw `user is not object in event ${event.type}`
+    return user;
+
+}
 
 export const IncrementAgentSessionsOnCreated = () =>
     window.addEventListener(Events.SessionCreated, () =>
@@ -15,16 +25,12 @@ export const IncrementAgentHitsOnInitialized = () =>
 
 export const setCurrentUserOnAuthenticated = () =>
     window.addEventListener(Events.UserAuthenticated, event => {
-        const user = getEventDetail(event, 'user')
-        if (!user) throw `user not found on ${event.type}`
-        setCurrentUser(user.uuid ?? user.id)
+        setCurrentUser(getEventUser(event))
     })
 
 export const setCurrentUserOnMounted = () =>
     window.addEventListener(Events.UserMounted, event => {
-        const user = getEventDetail(event, 'user')
-        if (!user) throw `user not found on ${event.type}`
-        setCurrentUser(user.uuid ?? user.id)
+        setCurrentUser(getEventUser(event))
     })
 
 export const setCurrentAgentOnInitialized = () =>
@@ -39,4 +45,3 @@ export const IncrementUserHitsOnMounted = () =>
     window.addEventListener(Events.UserMounted, () =>
         incrementUserCounter('hits'),
     )
-

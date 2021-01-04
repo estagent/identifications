@@ -1,10 +1,16 @@
 import {getIdentifications, updateIdentifications} from './identifications'
+import {dispatchNewUserFound} from "./dispacthers";
 
 let userId
 
-export const setCurrentUser = id => {
-    userId = id
-    updateIdentifications('currUI', id)
+export const setCurrentUser = user => {
+    userId = user.uuid ?? user.id
+    const users = getUsers();
+    updateIdentifications('currUi', userId)
+    if (!Object.keys(users).includes(userId))
+        dispatchNewUserFound({
+            user: user
+        })
 }
 
 export const getUsers = () => {
