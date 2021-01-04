@@ -7,6 +7,7 @@ import {
     IncrementUserHitsOnMounted,
     setCurrentUserOnAuthenticated,
     setCurrentAgentOnInitialized,
+    setCurrentUserOnMounted,
 } from './listeners'
 import {getUsers} from "./users";
 import {getAgents} from "./agents";
