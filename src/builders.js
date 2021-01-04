@@ -1,16 +1,16 @@
-import {getIdentifications} from "./identifications";
+import {getIdentifications} from './identifications'
 
 const makeIdentificationHeaders = (options) => {
-    const identifications = getIdentifications();
+    const identifications = getIdentifications()
     const headers = {}
 
     const addHeader = (identification, hKey) => {
 
         if (!identification)
-            throw "identification key required";
+            throw 'Init Error: identification key required'
 
         if (typeof identification !== 'string')
-            throw "identification key must be string"
+            throw 'Init Error: identification key must be string'
 
         if (!identifications.hasOwnProperty(identification))
             throw `${identification} is not identification key `
@@ -19,7 +19,7 @@ const makeIdentificationHeaders = (options) => {
             hKey = 'X-'.concat(identification.capitalize())
 
         if (typeof hKey !== 'string')
-            throw "header key must be string"
+            throw 'Init Error: header key must be string'
 
         headers[hKey] = identifications[identification]
     }
@@ -40,31 +40,31 @@ const makeIdentificationHeaders = (options) => {
     } else if (options instanceof Object) // if object, headers keys are expected
         makeHeadersFromObject(options)
 
-    else if (typeof options === "string")
+    else if (typeof options === 'string')
         addHeader(options)
-    else addHeader('identifier');
+    else addHeader('identifier')
 
-    return headers;
+    return headers
 }
 
 export const updateHeadersWithIdentifications = (headers, opts) => {
 
     if (typeof headers !== 'object')
-        throw "headers is not object"
+        throw 'Init Error: headers is not object'
 
     let identificationHeaders = {}
 
     if (!opts)
         identificationHeaders = makeIdentificationHeaders()
-    else if (typeof opts == "string")
-        identificationHeaders = makeIdentificationHeaders(opts);
+    else if (typeof opts == 'string')
+        identificationHeaders = makeIdentificationHeaders(opts)
 
     if (opts instanceof Array) {
         identificationHeaders = makeIdentificationHeaders(opts)
 
     } else if (opts instanceof Object) {
 
-        const bOpts = [];
+        const bOpts = []
 
         if (opts.hasOwnProperty('identifier')) {
             if (opts.identifier !== false) {
@@ -76,8 +76,21 @@ export const updateHeadersWithIdentifications = (headers, opts) => {
         }
 
         if (opts.hasOwnProperty('timestamps')) {
-            if (opts.timestamps === true)
-                bOpts.push('createdAt', 'updatedAt')
+            if (opts.timestamps !== false) {
+                if (opts.timestamps === true)
+                    bOpts.push('createdAt', 'updatedAt')
+                else if (opts.timestamps instanceof Array) {
+                    for (const value of opts.timestamps)
+                        bOpts.push(value) // might be objects also
+                } else if (opts.timestamps instanceof Object) {
+                    const keys = Object.keys(opts.timestamps)
+                    if (keys.length === 0)
+                        bOpts.push('createdAt', 'updatedAt')
+                    else for (const key of keys)
+                        bOpts.push({[key]: opts.timestamps[key]})
+                } else
+                    throw `Init Error: timestamps(identifications) option type (${typeof opts.timestamps}) is not supported`
+            }
         }
 
         // if (Object.keys(bOpts))
@@ -90,7 +103,7 @@ export const updateHeadersWithIdentifications = (headers, opts) => {
         headers[key] = identificationHeaders[key]
     }
 
-    return headers;
+    return headers
 }
 
 
