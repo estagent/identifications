@@ -16,7 +16,7 @@ const saveIdentifications = (data = {}) => {
 }
 const createIdentifications = () => {
     saveIdentifications({
-        identifier: uuid4(),
+        uuid: uuid4(),
         createdAt: Date.now(),
         updatedAt: Date.now(),
         ua: {},
@@ -25,7 +25,7 @@ const createIdentifications = () => {
 }
 export const getIdentifier = () => {
     const data = getIdentifications()
-    return data['identifier']
+    return data['uuid']
 }
 export const getIdentifications = () => {
     let str = localStorage.getItem(keyName)

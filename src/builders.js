@@ -1,6 +1,7 @@
 import {getIdentifications} from './identifications'
 
 const makeIdentificationHeaders = (options) => {
+
     const identifications = getIdentifications()
     const headers = {}
 
@@ -69,9 +70,9 @@ export const updateHeadersWithIdentifications = (headers, opts) => {
         if (opts.hasOwnProperty('identifier')) {
             if (opts.identifier !== false) {
                 if (typeof opts.identifier === 'string')
-                    bOpts.push({[opts.identifier]: 'identifier'})
+                    bOpts.push({[opts.identifier]: 'uuid'})
                 else
-                    bOpts.push('identifier')
+                    bOpts.push('uuid')
             }
         }
 
